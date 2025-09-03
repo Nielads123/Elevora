@@ -1,6 +1,6 @@
 import React from 'react'
 import tick from "./assets/Tick.png"
-import IphoneTwo from "./assets/iPhone 16 Pro Max.png"
+import IphoneTwo from "./assets/iphone16promax.png"
 import arrow from "./assets/rightarrow.png"
 import thumb from "./assets/thumb.png"
 import ticktwo from "./assets/Tick2.png"

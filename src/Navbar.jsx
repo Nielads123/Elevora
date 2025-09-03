@@ -1,27 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import Home from "./assets/ele.png";
 import "./App.css";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
-  // Initialize AOS when the component mounts
-  useEffect(() => {
-    AOS.init({
-      duration: 1000, // animation duration
-      once: true, // run only once
-    });
-  }, []);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="navbar" data-aos="fade-down">
+    <motion.header className="navbar" 
+     initial={{ opacity: 0, y: -70 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              y: { duration: 1, ease: "easeOut" },
+              
+            }}>
       {/* Logo */}
       <div className="logo">
         <img src={Home} className="logo-icon" alt="Elevora Logo" />
         <span className="logo-text">Elevora</span>
       </div>
 
-      {/* Nav Links */}
+      {/* Desktop nav links */}
       <nav className="nav-links">
         {["Home", "Services", "Resources", "About Us"].map((item, index) => (
           <a key={index} href="#" className="nav-item">
@@ -31,9 +30,28 @@ const Navbar = () => {
         ))}
       </nav>
 
-      {/* Button */}
-      <button className="download-btn">Download app</button>
-    </header>
+      {/* Desktop button */}
+      <button className="download-btn desktop-btn">Download app</button>
+
+      {/* Hamburger icon */}
+      <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+        <div className={`bar ${menuOpen ? "open" : ""}`}></div>
+        <div className={`bar ${menuOpen ? "open" : ""}`}></div>
+        <div className={`bar ${menuOpen ? "open" : ""}`}></div>
+      </div>
+
+      {/* Mobile menu */}
+      {menuOpen && (
+        <div className="mobile-menu active">
+          {["Home", "Services", "Resources", "About Us"].map((item, idx) => (
+            <a key={idx} href="#">
+              {item}
+            </a>
+          ))}
+          <button className="download-btn mobile-btn">Download app</button>
+        </div>
+      )}
+    </motion.header>
   );
 };
 

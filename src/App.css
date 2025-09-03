@@ -1,7 +1,7 @@
 
 body{
   background: #F9F5EB;
-}
+}/* Navbar base */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -10,10 +10,9 @@ body{
   padding: 16px 80px;
   background-color: #F9F5EB;
   box-shadow: 0 2px 4px rgba(82, 21, 77, 0.1);
- 
+  flex-wrap: wrap; /* allow wrapping on smaller screens */
 }
 
-/* Logo */
 .logo {
   display: flex;
   align-items: center;
@@ -21,43 +20,35 @@ body{
 }
 
 .logo-icon {
-  color: #4A306D; /* Purple */
   width: 35px;
   height: 35px;
-  margin-top: 0px;
 }
 
 .logo-text {
   font-size: 25px;
   font-weight: bold;
-  font-family: lato;
   color: #161417;
-  padding-top: 5px;
 }
-/* Navigation Links */
+
 .nav-links {
   display: flex;
   gap: 32px;
-  font-weight: 500;
-  color: #444;
 }
 
 .nav-item {
   position: relative;
   text-decoration: none;
-  color: inherit;
-  margin-top: 5px;
+  color: #444;
   font-size: 16px;
-  
-  transition: all 0.3s ease; 
+  font-weight: 500;
 }
 
 .nav-item .underline {
   position: absolute;
-  left: 0;
   bottom: -4px;
-  height: 2px;
+  left: 0;
   width: 0;
+  height: 2px;
   background-color: #5b21b6;
   transition: width 0.3s ease;
 }
@@ -66,41 +57,109 @@ body{
   width: 100%;
 }
 
-.nav-item:hover {
-  color: #4A306D;  
-  font-weight: 700; 
-  font-size: 18px;
-}
-
-/* Button */
 .download-btn {
   background-color: #4A306D;
   color: white;
   padding: 8px 20px;
   border: none;
-  border-radius: 9999px; 
+  border-radius: 9999px;
   font-size: 15px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .download-btn:hover {
-  background-color: #4c1d95; 
+  background-color: #4c1d95;
 }
 
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: #4A306D;
+  transition: 0.3s;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  display: none;
+  width: 100%;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+  background-color: #F9F5EB;
+  padding: 12px 0;
+  border-top: 1px solid #ddd;
+}
+
+.mobile-menu a {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: #444;
+  padding: 8px 0;
+}
+
+.mobile-menu .download-btn {
+  display: block;
+  margin: 0 auto;
+}
+
+/* Show mobile menu when active */
+.mobile-menu.active {
+  display: flex;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 16px 40px;
+  }
+  .nav-links {
+    gap: 20px;
+  }
+  .nav-item {
+    font-size: 15px;
+  }
+  .download-btn {
+    padding: 6px 16px;
+    font-size: 14px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .nav-links,
+  .desktop-btn {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* Top Section Base */
 .img-bg {
   background-image: url("./assets/22.PNG");
-  background-size: cover;       
-  background-repeat: no-repeat; 
-  background-position: center;  
-  height: 100vh;                
-  width: 100%;                 
-  margin: 20px;  
-   margin-left: -20px;   
-   position: relative;       
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  position: relative;
 }
 
-.top-1{
+/* Headings */
+.top-1 {
   font-size: 60px;
   font-weight: bold;
   font-family: Lato;
@@ -109,7 +168,7 @@ body{
   padding-top: 40px;
 }
 
-.top-2{
+.top-2 {
   font-size: 60px;
   font-weight: bold;
   font-family: Lato;
@@ -118,43 +177,70 @@ body{
   margin-top: -30px;
 }
 
-.top-3{
+.top-3 {
   font-family: Montserrat;
   text-align: center;
   font-size: 30px;
   padding-top: 10px;
 }
 
-.store{
-  position: relative;
-  align-items: center; 
-  justify-content: center;
+/* App store buttons */
+.store {
   display: flex;
-  
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 30px 0;
 }
 
-.store-1{
-  display: flex;
-  background-color: #D6BCFA;
-  width: 223px;
-  height: 75px;
-  justify-content: center;
-    align-items: center;
-    border-radius: 50px;
-    cursor: pointer;
-
-}
-
-.store-2{
+.store-1, .store-2 {
   display: flex;
   background-color: #D6BCFA;
   width: 223px;
   height: 75px;
   justify-content: center;
-    align-items: center;
-    border-radius: 50px;
-    cursor: pointer;
+  align-items: center;
+  border-radius: 50px;
+  cursor: pointer;
 }
+
+/* Tablet (1024px) */
+@media (max-width: 1024px) {
+  .top-1, .top-2 {
+    font-size: 45px;
+  }
+  .top-3 {
+    font-size: 22px;
+    padding: 5px 20px;
+  }
+  .store-1, .store-2 {
+    width: 190px;
+    height: 65px;
+  }
+}
+
+/* Mobile (768px and below) */
+@media (max-width: 768px) {
+  .top-1, .top-2 {
+    font-size: 32px;
+    padding-top: 20px;
+  }
+  .top-3 {
+    font-size: 18px;
+    padding: 5px 10px;
+  }
+  .store {
+    flex-direction: column;
+    gap: 15px;
+    margin: 20px 0;
+  }
+  .store-1, .store-2 {
+    width: 160px;
+    height: 55px;
+  }
+}
+
 
 .mobile {
   display: flex;
@@ -262,7 +348,7 @@ body{
   background-size: cover;       
   background-repeat: no-repeat; 
   background-position: center;  
-   height: 100vh;                
+   height: 70vh;                
   width: 100%;                 
   margin-top: 600px;  
    position: relative; 
@@ -277,7 +363,7 @@ body{
 .box-1 img{
   margin-top: -40px;
 }
-
+/* 
 .main-text{
     margin-top: 30px;
 }
@@ -485,7 +571,8 @@ justify-content: space-between;
    position: absolute;
   top: 15%;
   right: 0%;
-}
+} */
+
 .main-fix{
   background-color: #262626;
   height: 2000px;
@@ -1006,4 +1093,74 @@ font-weight: 600;
     align-items: center;
     border-radius: 50px;
     cursor: pointer;
+}
+
+
+
+/* Mobile/Tablet responsive adjustments */
+@media (max-width: 1024px) { /* Tablet */
+  .navbar {
+    padding: 16px 40px;
+  }
+  .nav-links {
+    gap: 20px;
+  }
+  .nav-item {
+    font-size: 15px;
+  }
+  .download-btn {
+    padding: 6px 16px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) { /* Mobile */
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 12px 20px;
+    height: auto;
+  }
+
+  /* Hide desktop nav links & button on mobile */
+  .nav-links,
+  .download-btn {
+    display: none;
+  }
+
+  /* Hamburger button */
+  .hamburger {
+    display: block;
+    cursor: pointer;
+  }
+
+  /* Mobile menu (hidden by default) */
+  .mobile-menu {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+    background-color: #F9F5EB;
+    padding: 12px 0;
+    border-top: 1px solid #ddd;
+  }
+
+  /* Show mobile menu when active */
+  .mobile-menu.active {
+    display: flex;
+  }
+
+  .mobile-menu a {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: #444;
+    padding: 8px 0;
+  }
+
+  .mobile-menu .download-btn {
+    display: block;
+    margin: 0 auto;
+  }
 }

@@ -1,17 +1,31 @@
-import React from 'react'
+import React, { useEffect } from "react";
 import Phone from "./assets/Mobile 1.png"
 import frame from "./assets/Frames.png"
 import file from "./assets/file.png"
 import calendar from "./assets/calendar.png"
 import date from "./assets/date.png"
+import { motion } from "framer-motion";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 
 export default function Mobile() {
+  useEffect(() => {
+     AOS.init({
+       duration: 1500,
+       once: false,
+       easing: "ease-out-cubic",
+     });
+ 
+     // Refresh on scroll to make sure it keeps working
+     AOS.refresh();
+   }, []);
   return (
     <>
       
       <div className="mobile ">
         
-        <div className="mobile-1">
+        <div className="mobile-1" data-aos="fade-right">
             <div>How the Elevora <br/>can help you?</div>
             
         </div>
@@ -23,7 +37,8 @@ export default function Mobile() {
        </div>
         </div>
 
-       <div className=' main px-[10px] block space-y-10 mt-14'>
+       <motion.div className=' main px-[10px] block space-y-10 mt-14'data-aos="fade-left"
+     >
                  <div className="mobile-3">
         
                 <div><img src={file} width="30px" height="30px" alt="" /></div>
@@ -54,7 +69,7 @@ export default function Mobile() {
       
         </div>
 
-       </div>
+       </motion.div>
 
 
         

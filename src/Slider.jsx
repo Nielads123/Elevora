@@ -1,172 +1,204 @@
-import React from 'react'
-import Huge from "./assets/huge.png";
-import Sphere from "./assets/sphere.png"
-import Iphone from "./assets/iphone.png"
-import SphereTwo from "./assets/sphere2.png"
-import PurpleSphere from "./assets/purple.png"
-import IphoneTwo from "./assets/iPhone 16 Pro Max.png"
-import IphoneThree from "./assets/iphone3.png"
-import PurpleTwo from "./assets/purple2.png"
-import { Swiper, SwiperSlide } from "swiper/react";
+"use client";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import "swiper/css";
-import "swiper/css/autoplay";
-import { Autoplay } from "swiper/modules";
+// Assets (make sure filenames are lowercase & no spaces!)
+import Huge from "./assets/huge.png";
+import Sphere from "./assets/sphere.png";
+import Iphone from "./assets/iphone.png";
+import SphereTwo from "./assets/sphere2.png";
+import PurpleSphere from "./assets/purple.png";
+import IphoneTwo from "./assets/iphone16promax.png";
+import IphoneThree from "./assets/iphone3.png";
+import PurpleTwo from "./assets/purple2.png";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Slider() {
+  const containerRef = useRef(null);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const section = sectionRef.current;
+    if (!container || !section) return;
+
+    const totalWidth = section.scrollWidth;
+    const viewportWidth = window.innerWidth;
+
+    gsap.to(section, {
+      x: -(totalWidth - viewportWidth),
+      ease: "none",
+      scrollTrigger: {
+        trigger: container,
+        start: "top top",
+        end: () => `+=${totalWidth - viewportWidth}`,
+        scrub: true,
+        pin: true,
+      },
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
+
   return (
     <>
-      <div className='main-text'>
-        <div className='text-1'>Just 4 simple steps away from </div>
-        <div className='text-2'>joining Elevora Journey.</div>
+      {/* Intro Text */}
+      <div className="text-center mt-12">
+        <div className="text-[40px] md:text-[50px] font-lato font-bold">
+          Just 4 simple steps away from
+        </div>
+        <div className="text-[35px] md:text-[45px] font-lato font-bold -mt-4 text-black-600">
+          joining Elevora Journey.
+        </div>
       </div>
 
-      <div className="slider-container">
-        {/* Swiper replaces your old .slider */}
-        <Swiper
-          modules={[Autoplay]}
-          spaceBetween={30}
-          slidesPerView={1}
-          autoplay={{
-            delay: 2500,
-            disableOnInteraction: false,
-          }}
-          loop={true}
-        >
+      {/* Horizontal scroll section */}
+      <section ref={containerRef} className="relative h-screen overflow-hidden">
+        <div ref={sectionRef} className="flex h-screen">
           {/* Slide 1 */}
-          <SwiperSlide>
-            <div className='slider'>
-              <div className='slider-1'>
-                <div className="slider-item-1">
-                  <img src={Huge} width="40px" alt="" />
-                  <div className="slider-text">
-                    Our app connects you <br /> with trusted professionals <br /> 
-                    to handle all your home <br /> maintenance needs.
-                  </div>
-                </div>
+          <div className="flex-shrink-0 w-screen h-screen flex items-center justify-center">
+            <div className="flex items-center">
+              {/* Left text */}
+              <div className="ml-[100px]">
+                <img src={Huge} width="40" alt="" />
+                <p className="font-lato font-bold text-[28px] mt-4 leading-snug">
+                  Our app connects you <br /> with trusted professionals <br />
+                  to handle all your home <br /> maintenance needs.
+                </p>
+              </div>
 
-                <div className="slider-item-2">
-                  <div className='profile'>Create your profile</div>
-                  <div className='signup'>
-                    Sign up and create your profile. <br />
-                    Tell us a bit about your home and <br /> what services you need. 
-                    This helps <br /> us match you with the best professionals.
-                  </div>
-                  <div className='slider-sphere'>
-                    <img src={Sphere} width="100px" alt="" />
-                  </div>
-                  <div className="slider-number">01</div>
-                  <div className='iphone'>
-                    <img src={Iphone} width="49px" alt="" />
-                  </div>
+              {/* Right box */}
+              <div className="bg-[#F87B53] w-[700px] h-[350px] text-white rounded-tl-[50px] rounded-bl-[50px] ml-[150px] relative">
+                <div className="font-montserrat text-[38px] font-semibold mt-[100px] ml-[80px]">
+                  Create your profile
+                </div>
+                <p className="ml-[80px] text-[17px] font-lato mt-3 leading-relaxed">
+                  Sign up and create your profile. <br />
+                  Tell us a bit about your home and <br /> what services you need. 
+                  This helps <br /> us match you with the best professionals.
+                </p>
+
+                {/* Decorations */}
+                <div className="absolute top-0 right-0">
+                  <img src={Sphere} width="100" alt="" />
+                </div>
+                <div className="absolute top-[10%] left-[2%] bg-white w-[50px] h-[50px] rounded-full text-[#F87B53] flex items-center justify-center font-bold">
+                  01
+                </div>
+                <div className="absolute top-[10%] right-0">
+                  <img src={Iphone} width="49" alt="" />
                 </div>
               </div>
             </div>
-          </SwiperSlide>
+          </div>
 
-          {/* Slide 2 (example) */}
-          <SwiperSlide>
-            <div className='slider'>
-              <div className='slider-12'>
-
-                <div className="slider-item-3">
-                  <div className='profile'>Create your profile</div>
-                  <div className='signup'>
-                    Sign up and create your profile. <br />
-                    Tell us a bit about your home and <br /> what services you need. 
-                    This helps <br /> us match you with the best professionals.
-                  </div>
-                  <div className='slider-sphere-2'>
-                    <img src={SphereTwo} width="300px" alt="" />
-                  </div>
-                  <div className="slider-number">01</div>
-                  <div className='iphone-1'>
-                    <img src={IphoneTwo} width="200px" alt="" />
-                  </div>
+          {/* Slide 2 */}
+          <div className="flex-shrink-0 w-screen h-screen flex items-center justify-center">
+            <div className="flex items-center">
+              {/* Left box */}
+              <div className="bg-[#F87B53] w-[800px] h-[350px] text-white rounded-[50px] relative">
+                <div className="font-montserrat text-[38px] font-semibold mt-[100px] ml-[80px]">
+                  Create your profile
                 </div>
+                <p className="ml-[80px] text-[17px] font-lato mt-3 leading-relaxed">
+                  Sign up and create your profile. <br />
+                  Tell us a bit about your home and <br /> what services you need. 
+                  This helps <br /> us match you with the best professionals.
+                </p>
 
-                <div className="slider-item-11">
-                  <img src={Huge} width="40px" alt="" />
-                  <div className="slider-text">
-                    Our app conne <br /> trusted profess 
-                  </div>
+                {/* Decorations */}
+                <div className="absolute top-0 right-0">
+                  <img src={SphereTwo} width="250" alt="" />
                 </div>
-
-                
-              </div>
-            </div>
-          </SwiperSlide>
-
-            
-          
-         <SwiperSlide>
-            <div className='slider'>
-              <div className='slider-1'>
-                <div className="slider-item-1">
-                  <img src={Huge} width="40px" alt="" />
-                  <div className="slider-text">
-                    Our app connects you <br /> with trusted professionals <br /> 
-                    to handle all your home <br /> maintenance needs.
-                  </div>
+                <div className="absolute top-[10%] left-[2%] bg-white w-[50px] h-[50px] rounded-full text-[#F87B53] flex items-center justify-center font-bold">
+                  02
                 </div>
-
-                <div className="slider-item-7">
-                  <div className='profile'>Create your profile</div>
-                  <div className='signup'>
-                    Sign up and create your profile. <br />
-                    Tell us a bit about your home and <br /> what services you need. 
-                    This helps <br /> us match you with the best professionals.
-                  </div>
-                  <div className='slider-sphere'>
-                    <img src={PurpleSphere} width="200px" alt="" />
-                  </div>
-                  <div className="slider-number">01</div>
-                  <div className='iphoneThree'>
-                    <img src={IphoneThree} width="130px" alt="" />
-                  </div>
+                <div className="absolute top-[10%] right-[10%]">
+                  <img src={IphoneTwo} width="196" alt="" />
                 </div>
               </div>
-            </div>
-          </SwiperSlide>
 
-
-          <SwiperSlide>
-            <div className='slider'>
-              <div className='slider-12'>
-
-                <div className="slider-item-17">
-                  <div className='profile'>Create your profile</div>
-                  <div className='signup'>
-                    Sign up and create your profile. <br />
-                    Tell us a bit about your home and <br /> what services you need. 
-                    This helps <br /> us match you with the best professionals.
-                  </div>
-                  <div className='slider-sphere-2'>
-                    <img src={PurpleTwo} width="300px" alt="" />
-                  </div>
-                  <div className="slider-number">01</div>
-                  <div className='iphone-1'>
-                    <img src={IphoneTwo} width="200px" alt="" />
-                  </div>
-                </div>
-
-                {/* <div className="slider-item-11">
-                  <img src={Huge} width="40px" alt="" />
-                  <div className="slider-text">
-                    Our app conne <br /> trusted profess 
-                  </div>
-                </div> */}
-
-                
+              {/* Right text */}
+              <div className="ml-[50px]">
+                <img src={Huge} width="40" alt="" />
+                <p className="font-lato font-bold text-[28px] mt-2">
+                  Our app connects <br /> trusted professionals
+                </p>
               </div>
             </div>
-          </SwiperSlide>
+          </div>
 
-          {/* You can add Slide 3, Slide 4 here */}
-        </Swiper>
-      </div>
+          {/* Slide 3 */}
+          <div className="flex-shrink-0 w-screen h-screen flex items-center justify-center">
+            <div className="flex items-center">
+              {/* Left text */}
+              <div className="ml-[-70px]">
+                <img src={Huge} width="40" alt="" />
+                <p className="font-lato font-bold text-[28px] mt-4 leading-snug">
+                  Our app connects you <br /> with trusted professionals <br />
+                  to handle all your home <br /> maintenance needs.
+                </p>
+              </div>
 
+              {/* Right box */}
+              <div className="bg-[#4A306D] w-[700px] h-[350px] text-white rounded-tl-[50px] rounded-bl-[50px] ml-[150px] relative">
+                <div className="font-montserrat text-[38px] font-semibold mt-[100px] ml-[80px]">
+                  Manage your tasks
+                </div>
+                <p className="ml-[80px] text-[18px] font-lato mt-3 leading-relaxed">
+                  Easily manage requests, track <br />
+                  progress, and stay in control <br />
+                  of all your home projects.
+                </p>
+
+                {/* Decorations */}
+                <div className="absolute top-0 right-0">
+                  <img src={PurpleSphere} width="200" alt="" />
+                </div>
+                <div className="absolute top-[10%] left-[2%] bg-white w-[50px] h-[50px] rounded-full text-[#F87B53] flex items-center justify-center font-bold">
+                  03
+                </div>
+                <div className="absolute top-[15%] right-0">
+                  <img src={IphoneThree} width="127" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Slide 4 */}
+          <div className="flex-shrink-0 w-screen h-screen flex items-center justify-center">
+            <div className="flex items-center">
+              <div className="bg-[#4A306D] w-[800px] h-[350px] text-white rounded-[50px] relative">
+                <div className="font-montserrat text-[38px] font-semibold mt-[100px] ml-[80px]">
+                  Get matched with pros
+                </div>
+                <p className="ml-[80px] text-[18px] font-lato mt-3 leading-relaxed">
+                  We’ll connect you with the best <br />
+                  professionals for your needs.
+                </p>
+
+                {/* Decorations */}
+                <div className="absolute top-0 right-0">
+                  <img src={PurpleTwo} width="250" alt="" />
+                </div>
+                <div className="absolute top-[10%] left-[2%] bg-white w-[50px] h-[50px] rounded-full text-[#F87B53] flex items-center justify-center font-bold">
+                  04
+                </div>
+                <div className="absolute top-[10%] right-[10%]">
+                  <img src={IphoneTwo} width="196" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    
   
     </>
-  )
+  );
 }

@@ -7,6 +7,7 @@ import Slider from "./Slider"
 import Clickaway from "./clickaway"
 import Repair from "./Repair";
 import LastMobile from "./LastMobile";
+
 function App(){
   return(
     <div>
@@ -19,6 +20,7 @@ function App(){
       <Clickaway/>
       <Repair/>
     <LastMobile/>
+   
     </div>
   )
 }
